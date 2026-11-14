@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>培创款式库 · 知衣竞店监控（改版预览）</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- 左侧导航栏 -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">P</div>
+        <div class="brand-text">
+          <div class="brand-title">培创款式库</div>
+          <div class="brand-sub">Design &amp; Competitor Hub</div>
+        </div>
+      </div>
+
+      <div class="sidebar-quick">
+        <div class="scope-pills">
+          <button class="scope-pill active">全部</button>
+          <button class="scope-pill">我的</button>
+          <button class="scope-pill">上新</button>
+          <button class="scope-pill">爆款</button>
+        </div>
+        <div class="quick-actions">
+          <button class="btn-primary-sm">+ 导入款式</button>
+          <button class="btn-ghost-sm">链接采集</button>
+        </div>
+      </div>
+
+      <nav class="nav-groups">
+        <div class="nav-group">
+          <div class="nav-group-label">数据看板</div>
+          <a class="nav-item active" href="javascript:void(0)">
+            <span class="nav-icon">📊</span>
+            <span>知衣竞店监控</span>
+            <span class="nav-badge">629</span>
+          </a>
+          <a class="nav-item" href="javascript:void(0)">
+            <span class="nav-icon">🛍️</span>
+            <span>抖音爆品监控</span>
+          </a>
+          <a class="nav-item" href="javascript:void(0)">
+            <span class="nav-icon">📈</span>
+            <span>全网趋势洞察</span>
+          </a>
+          <a class="nav-item" href="javascript:void(0)">
+            <span class="nav-icon">🏪</span>
+            <span>店铺档案库</span>
+            <span class="nav-muted">17</span>
+          </a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-label">素材与企划</div>
+          <a class="nav-item" href="javascript:void(0)">
+            <span class="nav-icon">👗</span>
+            <span>款式库</span>
+            <span class="nav-muted">2185</span>
+          </a>
+          <a class="nav-item" href="javascript:void(0)">
+            <span class="nav-icon">📋</span>
+            <span>企划看板</span>
+          </a>
+          <a class="nav-item" href="javascript:void(0)">
+            <span class="nav-icon">📕</span>
+            <span>小红书灵感</span>
+          </a>
+          <a class="nav-item" href="javascript:void(0)">
+            <span class="nav-icon">🎨</span>
+            <span>AI 改款工作台</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="avatar">C</div>
+          <div class="user-meta">
+            <div class="user-name">chenlong</div>
+            <div class="user-role">买手总监 · 专业版</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-area">
+      <!-- 1. 紧凑型顶部 Header：标题 + 核心 KPI 胶囊 + AI 洞察 + 操作 -->
+      <header class="top-header">
+        <div class="header-left">
+          <div class="title-row">
+            <h1>知衣竞店监控</h1>
+            <span class="sync-status ok" title="数据状态正常">● 实时同步中</span>
+          </div>
+          <div class="kpi-pills">
+            <div class="kpi-pill">
+              <span class="kpi-label">监控店铺</span>
+              <span class="kpi-val">17</span>
+            </div>
+            <div class="kpi-pill">
+              <span class="kpi-label">监控商品</span>
+              <span class="kpi-val">629</span>
+            </div>
+            <div class="kpi-pill highlight">
+              <span class="kpi-label">飙升爆款</span>
+              <span class="kpi-val">18</span>
+              <span class="kpi-delta">+6 今日</span>
+            </div>
+            <div class="kpi-pill">
+              <span class="kpi-label">最近同步</span>
+              <span class="kpi-val time">11/13 14:24</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="ai-insight-chip" id="aiInsightBtn" title="点击查看 AI 选品洞察">
+            <span class="spark">✨</span>
+            <span>AI 洞察：近7天收藏飙升 90 款，主力价带 ¥89-199</span>
+            <span class="arrow">›</span>
+          </button>
+          <button class="btn-outline" id="refreshBtn">↻ 刷新</button>
+          <button class="btn-primary" id="syncSettingBtn">⚙ 同步设置</button>
+        </div>
+      </header>
+
+      <!-- 2. 高度压缩的两行工具栏（替代原版 6 行冗余结构） -->
+      <section class="compact-toolbar">
+        <!-- 第一行：主 Tab + 监控维度胶囊 + 视图与导出 -->
+        <div class="toolbar-row row-tabs">
+          <div class="tabs-left">
+            <div class="segmented-tabs" id="primaryTabs">
+              <button class="seg-tab active" data-tab="products">监控商品 <span class="count">629</span></button>
+              <button class="seg-tab" data-tab="logs">同步记录</button>
+              <button class="seg-tab" data-tab="tasks">任务中心 <span class="dot"></span></button>
+            </div>
+            <div class="divider-v"></div>
+            <div class="sub-pills" id="subModePills">
+              <button class="sub-pill active" data-mode="all">全部款式</button>
+              <button class="sub-pill" data-mode="new">✨ 新品监控 <span class="mini">42</span></button>
+              <button class="sub-pill" data-mode="hot">🔥 热销商品 <span class="mini">86</span></button>
+              <button class="sub-pill" data-mode="surge">📈 收藏飙升 <span class="mini">18</span></button>
+              <button class="sub-pill" data-mode="compare">⚖️ 竞店对比</button>
+            </div>
+          </div>
+
+          <div class="tabs-right">
+            <button class="btn-compare" id="compareBasketBtn">
+              ⚖️ 对比篮 <span class="badge-num" id="compareCount">0</span>
+            </button>
+            <button class="btn-outline-sm" id="exportBtn">⬇ 导出</button>
+            <div class="view-switch" id="viewSwitch">
+              <button class="view-btn active" data-view="grid" title="卡片视图">⊞</button>
+              <button class="view-btn" data-view="list" title="紧凑表格视图">☰</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第二行：搜索 + 时间 + 价格 + 排序 + 店铺快捷筛选 -->
+        <div class="toolbar-row row-filters">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="搜索商品标题、货号、卖点或店铺名..." />
+            <button class="clear-btn hidden" id="clearSearchBtn">✕</button>
+          </div>
+
+          <div class="filter-controls">
+            <select id="timeRangeSelect" class="filter-select">
+              <option value="7">近 7 天</option>
+              <option value="30" selected>近 30 天 (10/14-11/13)</option>
+              <option value="90">近 90 天</option>
+            </select>
+
+            <select id="categorySelect" class="filter-select">
+              <option value="all">全部分类</option>
+              <option value="针织衫">针织衫 / 毛衣</option>
+              <option value="连衣裙">连衣裙</option>
+              <option value="外套">外套 / 大衣</option>
+              <option value="卫衣">卫衣 / T恤</option>
+            </select>
+
+            <select id="priceSelect" class="filter-select">
+              <option value="all">全部价格</option>
+              <option value="0-100">¥100 以下</option>
+              <option value="100-200">¥100 - ¥200</option>
+              <option value="200+">¥200 以上</option>
+            </select>
+
+            <select id="sortSelect" class="filter-select">
+              <option value="fav_desc">排序：收藏数由高到低</option>
+              <option value="surge_desc">排序：7日收藏增速</option>
+              <option value="sales_desc">排序：30日销量由高到低</option>
+              <option value="newest">排序：最新上架</option>
+              <option value="price_asc">排序：价格由低到高</option>
+            </select>
+
+            <button class="btn-reset" id="resetFilterBtn">重置</button>
+          </div>
+
+          <div class="result-summary">
+            当前展示 <strong id="visibleCount">0</strong> 款
+          </div>
+        </div>
+
+        <!-- 第三行：超紧凑单行店铺横条（替代折叠大面板） -->
+        <div class="shop-strip" id="shopStrip">
+          <!-- JS 动态渲染 -->
+        </div>
+      </section>
+
+      <!-- 3. 主内容展示区：卡片网格 / 紧凑表格 / 同步记录 / 任务中心 -->
+      <section class="content-area">
+        <div id="productGrid" class="product-grid"></div>
+        <div id="productTableWrap" class="product-table-wrap hidden"></div>
+        <div id="logsView" class="subpage-view hidden"></div>
+        <div id="tasksView" class="subpage-view hidden"></div>
+        <div id="emptyState" class="empty-state hidden">
+          <div class="empty-icon">🧥</div>
+          <div class="empty-title">没有找到符合条件的监控款式</div>
+          <div class="empty-desc">试试清空搜索关键词或放宽筛选条件</div>
+          <button class="btn-primary" id="emptyResetBtn">恢复全部款式</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 4. 重构后的二级详情页（双栏工作台弹窗） -->
+  <div class="modal-backdrop hidden" id="detailModal">
+    <div class="detail-dialog" role="dialog" aria-modal="true">
+      <div class="detail-topbar">
+        <div class="detail-breadcrumb">
+          <span>知衣竞店监控</span>
+          <span>/</span>
+          <span id="modalShopBreadcrumb">店铺名</span>
+          <span>/</span>
+          <strong id="modalIdBreadcrumb">款式详情</strong>
+        </div>
+        <div class="detail-nav-actions">
+          <button class="btn-outline-sm" id="prevItemBtn">← 上一款</button>
+          <button class="btn-outline-sm" id="nextItemBtn">下一款 →</button>
+          <button class="modal-close" id="closeModalBtn" title="关闭 (ESC)">✕</button>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <!-- 左侧：视觉与快速操作 -->
+        <div class="detail-left">
+          <div class="gallery-main">
+            <img id="modalMainImg" src="" alt="商品主图" />
+            <div class="gallery-badges" id="modalBadges"></div>
+          </div>
+          <div class="gallery-thumbs" id="modalThumbs"></div>
+
+          <div class="color-section">
+            <div class="section-mini-title">颜色 SKU（<span id="modalColorCount">3</span>色）</div>
+            <div class="color-swatches" id="modalSwatches"></div>
+          </div>
+
+          <div class="style-tags-box">
+            <div class="section-mini-title">AI 风格与属性标签</div>
+            <div class="style-tags" id="modalStyleTags"></div>
+          </div>
+
+          <div class="left-cta-group">
+            <button class="btn-primary full" id="addToLibraryBtn">＋ 加入培创款式库</button>
+            <div class="cta-row-2">
+              <button class="btn-outline full" id="modalCompareBtn">⚖️ 加入对比</button>
+              <button class="btn-outline full" id="openSourceBtn">↗ 查看原链接</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧：核心指标、趋势图、SKU矩阵与AI拆款 -->
+        <div class="detail-right">
+          <div class="detail-header-info">
+            <div class="shop-badge-row">
+              <span class="shop-pill" id="modalShopPill"></span>
+              <span class="launch-pill" id="modalLaunchPill"></span>
+              <span class="cat-pill" id="modalCatPill"></span>
+            </div>
+            <h2 class="detail-title" id="modalTitle"></h2>
+            <div class="price-banner">
+              <div class="price-main">
+                <span class="currency">¥</span>
+                <span class="amount" id="modalPrice"></span>
+                <span class="origin-price" id="modalOriginPrice"></span>
+                <span class="discount-tag" id="modalDiscount"></span>
+              </div>
+              <div class="price-note" id="modalPriceNote">近30天价格稳定 · 券后预估到手</div>
+            </div>
+          </div>
+
+          <!-- 4个核心数据指标卡 -->
+          <div class="detail-kpi-grid" id="modalKpiGrid"></div>
+
+          <!-- 详情页内部分栏 Tab -->
+          <div class="detail-tabs" id="detailTabs">
+            <button class="detail-tab active" data-dtab="trend">📈 数据趋势与口碑</button>
+            <button class="detail-tab" data-dtab="sku">📦 SKU 规格矩阵</button>
+            <button class="detail-tab" data-dtab="ai">✨ AI 拆款与打版建议</button>
+          </div>
+
+          <div class="detail-tab-panels">
+            <!-- Panel 1: 趋势图 + 买家评价词云 -->
+            <div class="detail-panel active" id="panel-trend">
+              <div class="chart-card">
+                <div class="chart-header">
+                  <div>
+                    <div class="chart-title">近 14 天收藏与销量增长趋势</div>
+                    <div class="chart-sub">鼠标悬停节点可查看每日精确数据</div>
+                  </div>
+                  <div class="chart-legend">
+                    <span class="leg fav"><i></i> 累计收藏</span>
+                    <span class="leg sales"><i></i> 日增销量</span>
+                  </div>
+                </div>
+                <div class="chart-svg-wrap" id="modalTrendChart"></div>
+              </div>
+
+              <div class="reviews-card">
+                <div class="section-mini-title">买家评价高频词提取（AI 聚合）</div>
+                <div class="review-pills" id="modalReviewPills"></div>
+              </div>
+            </div>
+
+            <!-- Panel 2: SKU 矩阵 -->
+            <div class="detail-panel" id="panel-sku">
+              <div class="sku-table-wrap" id="modalSkuTable"></div>
+            </div>
+
+            <!-- Panel 3: AI 拆款报告 -->
+            <div class="detail-panel" id="panel-ai">
+              <div class="ai-report-grid" id="modalAiReport"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 对比篮抽屉 -->
+  <div class="compare-drawer hidden" id="compareDrawer">
+    <div class="compare-header">
+      <strong>⚖️ 竞品款式对比（最多 4 款）</strong>
+      <div class="compare-actions">
+        <button class="btn-primary" id="openCompareMatrixBtn" style="padding:4px 12px;font-size:12px;">开始横向对比</button>
+        <button class="btn-outline-sm" id="clearCompareBtn">清空</button>
+        <button class="btn-outline-sm" id="closeCompareBtn">收起</button>
+      </div>
+    </div>
+    <div class="compare-grid" id="compareGrid"></div>
+  </div>
+
+  <!-- 6. AI 选品洞察弹窗 -->
+  <div class="modal-backdrop hidden" id="aiInsightModal">
+    <div class="small-dialog">
+      <div class="detail-topbar">
+        <strong>✨ AI 竞店选品周报洞察（近 7 天）</strong>
+        <button class="modal-close" data-close="aiInsightModal">✕</button>
+      </div>
+      <div class="small-dialog-body" id="aiInsightBody"></div>
+    </div>
+  </div>
+
+  <!-- 7. 同步设置弹窗 -->
+  <div class="modal-backdrop hidden" id="syncSettingModal">
+    <div class="small-dialog">
+      <div class="detail-topbar">
+        <strong>⚙ 知衣竞店同步与预警设置</strong>
+        <button class="modal-close" data-close="syncSettingModal">✕</button>
+      </div>
+      <div class="small-dialog-body">
+        <div class="setting-row">
+          <div>
+            <div class="setting-title">自动采集频率</div>
+            <div class="setting-desc">定时拉取 17 家已监控店铺的上新与收藏销量变化</div>
+          </div>
+          <select id="syncFreqSelect" class="filter-select">
+            <option value="1">每 1 小时</option>
+            <option value="2" selected>每 2 小时（推荐）</option>
+            <option value="6">每 6 小时</option>
+            <option value="24">每天一次</option>
+          </select>
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-title">收藏飙升预警阈值</div>
+            <div class="setting-desc">7 日收藏增量超过该数值自动标记为「📈 收藏飙升」</div>
+          </div>
+          <input type="number" id="surgeThresholdInput" class="filter-select" value="45" style="width:90px;" />
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-title">自动 AI 拆款分析</div>
+            <div class="setting-desc">新入库爆款自动生成版型、面料与打版建议</div>
+          </div>
+          <label class="switch-label"><input type="checkbox" id="autoAiCheck" checked /> 已开启</label>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px;">
+          <button class="btn-outline" data-close="syncSettingModal">取消</button>
+          <button class="btn-primary" id="saveSyncSettingBtn">保存设置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. 横向对比矩阵弹窗 -->
+  <div class="modal-backdrop hidden" id="compareMatrixModal">
+    <div class="detail-dialog" style="width:min(980px,95vw);">
+      <div class="detail-topbar">
+        <strong>⚖️ 竞品款式横向对比矩阵</strong>
+        <button class="modal-close" data-close="compareMatrixModal">✕</button>
+      </div>
+      <div class="small-dialog-body" id="compareMatrixBody" style="overflow:auto;"></div>
+    </div>
+  </div>
+
+  <!-- Toast 提示 -->
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
